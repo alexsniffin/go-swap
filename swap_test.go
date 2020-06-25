@@ -47,7 +47,7 @@ func TestSwapper_Integration(t *testing.T) {
 	*str = "new"
 	fmt.Println(fmt.Sprintf("%#v", ex))
 
-	if ex.nested.subPrivateFieldOne != "test" {
+	if ex.nested.subPrivateFieldOne != "new" {
 		t.Errorf("unexpected value for subPrivateFieldOne: %s", ex.nested.subPrivateFieldOne)
 	}
 }
