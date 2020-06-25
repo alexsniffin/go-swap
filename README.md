@@ -9,8 +9,8 @@ ex := example{
         subPrivateField: "old",
     },
 }
-swapper := Swapper{}
-myPointer := swapper.Init(&ex).
+
+myPointer := swap.Init(&ex).
     Find("nested", func(p unsafe.Pointer) interface{} {
         return (*nestedFields)(p)
     }).

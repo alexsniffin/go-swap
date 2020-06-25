@@ -33,8 +33,7 @@ func TestSwapper_Integration(t *testing.T) {
 		},
 	}
 
-	swapper := Swapper{}
-	myPointer := swapper.Init(&ex).
+	myPointer := Init(&ex).
 		Find("nested", func(p unsafe.Pointer) interface{} {
 			return (*nestedFields)(p)
 		}).

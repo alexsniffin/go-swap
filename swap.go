@@ -14,9 +14,10 @@ type Swap interface {
 	Pointer() unsafe.Pointer
 }
 
-func (s *Swapper) Init(obj interface{}) *Swapper {
-	s.current = obj
-	return s
+func Init(obj interface{}) *Swapper {
+	return &Swapper{
+		current: obj,
+	}
 }
 
 func (s *Swapper) Find(field string, castFn func(p unsafe.Pointer) interface{}) *Swapper {
