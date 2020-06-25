@@ -1,3 +1,3 @@
-module github.com/alexsniffin/go-swap.git
+module github.com/alexsniffin/go-swap
 
 go 1.14
