@@ -1,6 +1,7 @@
 package swap
 
 import (
+	"fmt"
 	"testing"
 	"unsafe"
 )
@@ -20,9 +21,9 @@ type nestedFields struct {
 }
 
 func TestSwapper_Integration(t *testing.T) {
-	obj := example{
+	ex := example{
 		nested: nestedFields{
-			subPrivateFieldOne:   "",
+			subPrivateFieldOne:   "old",
 			subPrivateFieldTwo:   0,
 			subPrivateFieldThree: 0,
 			subPrivateFieldFour:  0,
@@ -33,7 +34,7 @@ func TestSwapper_Integration(t *testing.T) {
 	}
 
 	swapper := Swapper{}
-	myPointer := swapper.Init(&obj).
+	myPointer := swapper.Init(&ex).
 		Find("nested", func(p unsafe.Pointer) interface{} {
 			return (*nestedFields)(p)
 		}).
@@ -41,10 +42,12 @@ func TestSwapper_Integration(t *testing.T) {
 			return (*string)(p)
 		}).Pointer()
 
+	fmt.Println(fmt.Sprintf("%#v", ex))
 	str := myPointer.(*string)
-	*str = "test"
+	*str = "new"
+	fmt.Println(fmt.Sprintf("%#v", ex))
 
-	if obj.nested.subPrivateFieldOne != "test" {
-		t.Errorf("unexpected value for subPrivateFieldOne: %s", obj.nested.subPrivateFieldOne)
+	if ex.nested.subPrivateFieldOne != "test" {
+		t.Errorf("unexpected value for subPrivateFieldOne: %s", ex.nested.subPrivateFieldOne)
 	}
 }

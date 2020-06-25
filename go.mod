@@ -1,3 +1,3 @@
-module github.com/TheWeatherCompany/sun-ms-ali.git
+module github.com/alexsniffin/go-swap.git
 
 go 1.14
